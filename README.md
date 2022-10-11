@@ -1,2 +1,2 @@
 # hq-invoice
-Generate an item list form HQ reporting CSVs
+Generate an itemized list from CVS files exported from the HQ time tracking software.
