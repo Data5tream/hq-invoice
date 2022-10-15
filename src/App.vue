@@ -9,7 +9,7 @@
         <Configurator />
       </UiGridCell>
       <UiGridCell columns="8">
-        <HqContent v-if="hasUploaded" />
+        <HqContent v-if="hasUploaded" :data="data.prepared" />
         <HqUpload v-else @update="updateData" />
       </UiGridCell>
     </UiGrid>
@@ -17,9 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import type { UploadData } from '@/types';
+import type { AppData, UploadData } from '@/types';
 
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 
 import { UiTopAppBar, UiGrid, UiGridCell } from 'balm-ui';
 
@@ -27,11 +27,18 @@ import Configurator from '@/components/Configurator.vue';
 import HqContent from '@/components/HqContent.vue';
 import HqUpload from '@/components/HqUpload.vue';
 
-const hasUploaded = ref(false)
+import convertData from '@/tools/dataConvertor';
 
-const updateData = (data: Array<UploadData>) => {
-  console.log(data[0]);
-}
+const hasUploaded = ref(false);
+const rate = ref(10);
+const data = reactive({ raw: [], prepared: [] } as AppData);
+
+
+const updateData = (rawData: Array<UploadData>) => {
+  hasUploaded.value = true;
+  data.raw = rawData;
+  data.prepared = convertData(rawData, rate.value);
+};
 
 </script>
 

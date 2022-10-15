@@ -17,3 +17,9 @@ export interface UploadData {
   endTime: number,
   duration: number,
 }
+
+
+export interface AppData {
+  raw: Array<UploadData>,
+  prepared: Array<any>,
+}
