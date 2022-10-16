@@ -1,1 +1,5 @@
 @import "./base.css";
+
+:root {
+    --mdc-theme-primary: #3D5A72;
+}
