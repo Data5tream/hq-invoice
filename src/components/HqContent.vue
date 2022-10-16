@@ -10,23 +10,23 @@
 </template>
 
 <script setup lang="ts">
+import type { PreparedData } from '@/types';
+
 import { reactive } from 'vue';
+import { formatCurrency } from '@/tools/util';
 
 import { UiTable } from 'balm-ui';
 
 const props = defineProps({
   data: {
-    type: Array,
+    type: Array<PreparedData>,
   },
 });
 
 const tableData = reactive({
   thead: ['Projekt', 'Stunden', 'Wert'] as Array<string>,
-  tbody: ['name', { slot: 'time' }, { slot: 'value' }] as Array<string>,
+  tbody: ['name', { slot: 'time' }, { slot: 'value' }] as Array<any>,
 });
-
-const formatCurrency = (val: number) =>
-  (new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' })).format(val);
 </script>
 
 <style scoped>

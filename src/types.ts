@@ -18,8 +18,14 @@ export interface UploadData {
   duration: number,
 }
 
+export interface PreparedData {
+  name: string,
+  totalTime: number,
+  value: number,
+  sets: Array<UploadData>,
+}
 
 export interface AppData {
   raw: Array<UploadData>,
-  prepared: Array<any>,
+  prepared: Array<PreparedData>,
 }
