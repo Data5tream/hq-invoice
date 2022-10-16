@@ -23,18 +23,21 @@ footer {
   height: 64px;
   padding: 16px 32px;
 }
+
 footer > div > * {
   padding: 0 8px;
   border-right: 1px solid var(--mdc-theme-on-primary);
 }
+
 footer > div > *:first-child {
   padding-left: 0;
 }
+
 footer > div > *:last-child {
   border-right: 0;
 }
 
-a,a:visited {
+a, a:visited {
   color: var(--mdc-theme-on-primary);
 }
 </style>

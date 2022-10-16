@@ -16,7 +16,7 @@
       </UiGridCell>
     </UiGrid>
   </main>
-  <HqFooter/>
+  <HqFooter />
 </template>
 
 <script setup lang="ts">
