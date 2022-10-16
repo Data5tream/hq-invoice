@@ -9,11 +9,14 @@
         <HqConfig v-model:rate="rate" />
       </UiGridCell>
       <UiGridCell columns="8">
-        <HqContent v-if="hasUploaded" :data="data.prepared" />
-        <HqUpload v-else @update="updateData" />
+        <transition-group name="fade">
+          <HqContent v-if="hasUploaded" key="content" :data="data.prepared" />
+          <HqUpload v-else key="loader" @update="updateData" />
+        </transition-group>
       </UiGridCell>
     </UiGrid>
   </main>
+  <HqFooter/>
 </template>
 
 <script setup lang="ts">
@@ -26,6 +29,7 @@ import { UiTopAppBar, UiGrid, UiGridCell } from 'balm-ui';
 import HqConfig from '@/components/HqConfig.vue';
 import HqContent from '@/components/HqContent.vue';
 import HqUpload from '@/components/HqUpload.vue';
+import HqFooter from '@/components/HqFooter.vue';
 
 import convertData from '@/tools/dataConvertor';
 
@@ -47,6 +51,10 @@ watch(rate, (newRate) => {
 </script>
 
 <style scoped>
+main {
+  min-height: calc(100vh - 64px);
+}
+
 .app-content {
   max-width: 1200px;
   margin: 0 auto;

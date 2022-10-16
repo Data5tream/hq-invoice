@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Einstellungen</h2>
-    <UiTextfield label="Hourly rate" inputType="number" :modelValue="rate" @update:modelValue="updateRate" outlined />
+    <UiTextfield label="€/h" inputType="number" :modelValue="rate" @update:modelValue="updateRate" outlined />
   </div>
 </template>
 

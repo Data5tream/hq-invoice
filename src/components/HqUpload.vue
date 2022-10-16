@@ -26,5 +26,6 @@ const loadFile = (data: Array<UploadFile>) => {
   display: flex;
   justify-content: center;
   margin-top: 128px;
+  width: 100%;
 }
 </style>
