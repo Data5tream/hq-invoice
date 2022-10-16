@@ -1,4 +1,5 @@
 import { parse } from '@vanillaes/csv';
+
 import type { UploadData } from '@/types';
 
 
@@ -44,7 +45,7 @@ const parser = (rawData: Array<number>): Array<UploadData> => {
     startTime: parseTime(ele[3]),
     endTime: parseTime(ele[3]),
     duration: (parseTime(ele[4]) - parseTime(ele[3])) / 3600000,
-  }));
+  } as UploadData));
 };
 
 export default parser;
