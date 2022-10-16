@@ -9,6 +9,7 @@ export interface UploadFile {
   previewError: number,
 }
 
+
 export interface UploadData {
   project: string,
   activity: string,
@@ -18,6 +19,7 @@ export interface UploadData {
   duration: number,
 }
 
+
 export interface PreparedData {
   name: string,
   totalTime: number,
@@ -25,7 +27,12 @@ export interface PreparedData {
   sets: Array<UploadData>,
 }
 
+
 export interface AppData {
   raw: Array<UploadData>,
   prepared: Array<PreparedData>,
+  totals: {
+    hours: number,
+    value: number,
+  }
 }

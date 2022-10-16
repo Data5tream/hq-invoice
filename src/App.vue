@@ -6,7 +6,10 @@
   <main>
     <UiGrid class="app-content">
       <UiGridCell columns="4">
-        <HqConfig v-model:rate="rate" />
+        <HqConfig v-model:rate="rate" v-model:tax="tax" />
+        <transition name="fade">
+          <HqTotals v-if="hasUploaded" :totals="data.totals" :tax="tax" />
+        </transition>
       </UiGridCell>
       <UiGridCell columns="8">
         <transition-group name="fade">
@@ -24,10 +27,11 @@ import type { AppData, UploadData } from '@/types';
 
 import { reactive, ref, watch } from 'vue';
 
-import { UiTopAppBar, UiGrid, UiGridCell } from 'balm-ui';
+import { UiGrid, UiGridCell, UiTopAppBar } from 'balm-ui';
 
 import HqConfig from '@/components/HqConfig.vue';
 import HqContent from '@/components/HqContent.vue';
+import HqTotals from '@/components/HqTotals.vue';
 import HqUpload from '@/components/HqUpload.vue';
 import HqFooter from '@/components/HqFooter.vue';
 
@@ -35,18 +39,29 @@ import convertData from '@/tools/dataConvertor';
 
 const hasUploaded = ref(false);
 const rate = ref(10);
-const data = reactive({ raw: [], prepared: [] } as AppData);
+const tax = ref(20);
+
+const data = reactive({ raw: [], prepared: [], totals: { hours: 0, value: 0 } } as AppData);
 
 const updateData = (rawData: Array<UploadData>) => {
   hasUploaded.value = true;
   data.raw = rawData;
   data.prepared = convertData(rawData, rate.value);
+  calculateValues(rate.value);
+};
+
+const calculateValues = (newRate: number) => {
+  data.totals.hours = 0;
+  data.totals.value = 0;
+  data.prepared.forEach(ele => {
+    ele.value = ele.totalTime * newRate;
+    data.totals.hours += ele.totalTime;
+    data.totals.value += ele.value;
+  });
 };
 
 watch(rate, (newRate) => {
-  data.prepared.forEach(ele => {
-    ele.value = ele.totalTime * newRate;
-  });
+  calculateValues(newRate);
 });
 </script>
 
