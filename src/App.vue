@@ -30,12 +30,13 @@ import { reactive, ref, watch } from 'vue';
 import { UiGrid, UiGridCell, UiTopAppBar } from 'balm-ui';
 
 import HqConfig from '@/components/HqConfig.vue';
-import HqContent from '@/components/HqContent.vue';
-import HqTotals from '@/components/HqTotals.vue';
 import HqUpload from '@/components/HqUpload.vue';
 import HqFooter from '@/components/HqFooter.vue';
 
 import convertData from '@/tools/dataConvertor';
+
+const HqContent = () => import('@/components/HqContent.vue');
+const HqTotals = () => import('@/components/HqTotals.vue');
 
 const hasUploaded = ref(false);
 const rate = ref(10);

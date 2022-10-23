@@ -6,6 +6,16 @@ import vue from '@vitejs/plugin-vue'
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/hq-invoice/',
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          balm: ['balm-ui'],
+          vue: ['vue'],
+        }
+      }
+    }
+  },
   plugins: [vue()],
   resolve: {
     alias: {
