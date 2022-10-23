@@ -1,10 +1,13 @@
 <template>
   <UiTable :data="props.data" :thead="tableData.thead" :tbody="tableData.tbody" fullwidth>
+    <template #name="{ data }">
+      <span v-copy="copy(data.name)" v-text="data.name" />
+    </template>
     <template #time="{ data }">
-      {{ data.totalTime.toFixed(2) }}
+      <span v-copy="copy(data.totalTime.toFixed(2))" v-text="data.totalTime.toFixed(2)" />
     </template>
     <template #value="{ data }">
-      {{ formatCurrency(data.value) }}
+      <span v-copy="copy(formatCurrency(data.value))" v-text="formatCurrency(data.value)" />
     </template>
   </UiTable>
 </template>
@@ -15,17 +18,26 @@ import type { PreparedData } from '@/types';
 import { reactive } from 'vue';
 import { formatCurrency } from '@/tools/util';
 
-import { UiTable } from 'balm-ui';
+import { UiTable, useToast } from 'balm-ui';
 
 const props = defineProps({
   data: {
-    type: Array<PreparedData>,
+    type: Array < PreparedData >,
   },
 });
 
+const toast = useToast();
+
 const tableData = reactive({
   thead: ['Projekt', 'Stunden', 'Wert'] as Array<string>,
-  tbody: ['name', { slot: 'time' }, { slot: 'value' }] as Array<any>,
+  tbody: [{ slot: 'name' }, { slot: 'time' }, { slot: 'value' }] as Array<any>,
+});
+
+const copy = (text: string) => ({
+  text,
+  success: () => {
+    toast('Daten kopiert');
+  },
 });
 </script>
 
@@ -36,5 +48,9 @@ const tableData = reactive({
 
 :deep(.mdc-data-table__cell:first-child) {
   text-align: left;
+}
+
+span {
+  cursor: pointer;
 }
 </style>

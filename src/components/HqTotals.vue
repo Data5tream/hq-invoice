@@ -3,26 +3,34 @@
     <h2>Gesamtwerte</h2>
     <UiList class="totals-list">
       <UiItem>
-        <UiItemTextContent>{{ totals.hours.toFixed(2) }}</UiItemTextContent>
+        <UiItemTextContent v-copy="copy(totals.hours.toFixed(2))">
+          {{ totals.hours.toFixed(2) }}
+        </UiItemTextContent>
         <UiItemLastContent>
           Std.
         </UiItemLastContent>
       </UiItem>
       <UiItem>
-        <UiItemTextContent>{{ formatCurrency(totals.value * (1 - tax / 100)) }}</UiItemTextContent>
+        <UiItemTextContent v-copy="copy(formatCurrency(totals.value * (1 - tax / 100)))">
+          {{ formatCurrency(totals.value * (1 - tax / 100)) }}
+        </UiItemTextContent>
         <UiItemLastContent>
           Netto ({{ 100 - tax }}%)
         </UiItemLastContent>
       </UiItem>
       <UiItem>
-        <UiItemTextContent>{{ formatCurrency(totals.value * tax / 100) }}</UiItemTextContent>
+        <UiItemTextContent v-copy="copy(formatCurrency(totals.value * tax / 100))">
+          {{ formatCurrency(totals.value * tax / 100) }}
+        </UiItemTextContent>
         <UiItemLastContent>
           Steuern ({{ tax }}%)
         </UiItemLastContent>
       </UiItem>
       <UiItemDivider />
       <UiItem>
-        <UiItemTextContent>{{ formatCurrency(totals.value) }}</UiItemTextContent>
+        <UiItemTextContent v-copy="copy(formatCurrency(totals.value))">
+          {{ formatCurrency(totals.value) }}
+        </UiItemTextContent>
         <UiItemLastContent>
           Brutto
         </UiItemLastContent>
@@ -34,7 +42,7 @@
 <script setup lang="ts">
 import { formatCurrency } from '@/tools/util';
 
-import { UiItem, UiItemDivider, UiItemLastContent, UiItemTextContent, UiList } from 'balm-ui';
+import { UiItem, UiItemDivider, UiItemLastContent, UiItemTextContent, UiList, useToast } from 'balm-ui';
 
 defineProps({
   totals: {
@@ -44,6 +52,15 @@ defineProps({
   tax: {
     type: Number,
     default: 0,
+  },
+});
+
+const toast = useToast();
+
+const copy = (text: string) => ({
+  text,
+  success: () => {
+    toast('Daten kopiert');
   },
 });
 </script>
