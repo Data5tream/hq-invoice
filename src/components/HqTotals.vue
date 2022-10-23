@@ -2,24 +2,24 @@
   <div>
     <h2>Gesamtwerte</h2>
     <UiList class="totals-list">
-      <UiItem>
-        <UiItemTextContent v-copy="copy(totals.hours.toFixed(2))">
+      <UiItem v-copy="copy(totals.hours.toFixed(2))">
+        <UiItemTextContent>
           {{ totals.hours.toFixed(2) }}
         </UiItemTextContent>
         <UiItemLastContent>
           Std.
         </UiItemLastContent>
       </UiItem>
-      <UiItem>
-        <UiItemTextContent v-copy="copy(formatCurrency(totals.value * (1 - tax / 100)))">
+      <UiItem v-copy="copy(formatCurrency(totals.value * (1 - tax / 100)))">
+        <UiItemTextContent>
           {{ formatCurrency(totals.value * (1 - tax / 100)) }}
         </UiItemTextContent>
         <UiItemLastContent>
           Netto ({{ 100 - tax }}%)
         </UiItemLastContent>
       </UiItem>
-      <UiItem>
-        <UiItemTextContent v-copy="copy(formatCurrency(totals.value * tax / 100))">
+      <UiItem v-copy="copy(formatCurrency(totals.value * tax / 100))">
+        <UiItemTextContent>
           {{ formatCurrency(totals.value * tax / 100) }}
         </UiItemTextContent>
         <UiItemLastContent>
@@ -27,8 +27,8 @@
         </UiItemLastContent>
       </UiItem>
       <UiItemDivider />
-      <UiItem>
-        <UiItemTextContent v-copy="copy(formatCurrency(totals.value))">
+      <UiItem v-copy="copy(formatCurrency(totals.value))">
+        <UiItemTextContent>
           {{ formatCurrency(totals.value) }}
         </UiItemTextContent>
         <UiItemLastContent>

@@ -1,5 +1,5 @@
 <template>
-  <UiTopAppBar contentSelector="main">
+  <UiTopAppBar contentSelector="main" :navIcon="false">
     HQ Invoice
   </UiTopAppBar>
 
