@@ -10,7 +10,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      'balm-ui-plus': 'balm-ui/dist/balm-ui-plus.esm.js',
+      'balm-ui-plus': 'balm-ui/dist/balm-ui-plus.js',
       'balm-ui-css': 'balm-ui/dist/balm-ui.css'
     }
   }
