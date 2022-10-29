@@ -7,9 +7,12 @@
     <UiGrid class="app-content">
       <UiGridCell columns="4">
         <HqConfig v-model:rate="rate" v-model:tax="tax" />
-        <transition name="fade">
-          <HqTotals v-if="hasUploaded" :totals="data.totals" :tax="tax" />
-        </transition>
+        <transition-group name="fade">
+          <template v-if="hasUploaded">
+            <HqTotals :totals="data.totals" :tax="tax" />
+            <HqUpload key="loader" @update="updateData" />
+          </template>
+        </transition-group>
       </UiGridCell>
       <UiGridCell columns="8">
         <transition-group name="fade">
