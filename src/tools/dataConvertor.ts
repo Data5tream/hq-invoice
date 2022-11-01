@@ -6,8 +6,10 @@ const convertData = (rawData: Array<UploadData>, rate: number): Array<PreparedDa
   rawData.forEach(raw => {
     const ele = convertedData.find(ele => ele.name === raw.project);
     if (ele) {
-      ele.totalTime += raw.duration;
-      ele.value += raw.duration * rate;
+      // round number to 2 decimal points
+      const duration = Number(raw.duration.toFixed(2));
+      ele.totalTime += duration;
+      ele.value += duration * rate;
       ele.sets.push(raw);
     } else {
       convertedData.push({ name: raw.project, totalTime: raw.duration, value: raw.duration * rate, sets: [raw] });
