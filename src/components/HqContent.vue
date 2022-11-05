@@ -1,13 +1,19 @@
 <template>
   <UiTable :data="props.data" :thead="tableData.thead" :tbody="tableData.tbody" fullwidth>
     <template #name="{ data }">
-      <span v-copy="copy(data.name)" v-text="data.name" />
+      <HqCopy :val="data.name">
+        {{ data.name }}
+      </HqCopy>
     </template>
     <template #time="{ data }">
-      <span v-copy="copy(data.totalTime.toFixed(2))" v-text="data.totalTime.toFixed(2)" />
+      <HqCopy :val="data.totalTime.toFixed(2)">
+        {{ formatNumber(data.totalTime) }}
+      </HqCopy>
     </template>
     <template #value="{ data }">
-      <span v-copy="copy(formatCurrency(data.value))" v-text="formatCurrency(data.value)" />
+      <HqCopy :val="formatCurrency(data.value)">
+        {{ formatCurrency(data.value) }}
+      </HqCopy>
     </template>
   </UiTable>
 </template>
@@ -16,9 +22,11 @@
 import type { PreparedData } from '@/types';
 
 import { reactive } from 'vue';
-import { formatCurrency } from '@/tools/util';
+import { formatCurrency, formatNumber } from '@/tools/util';
 
-import { UiTable, useToast } from 'balm-ui';
+import { UiTable } from 'balm-ui';
+
+import HqCopy from '@/components/HqCopy.vue';
 
 const props = defineProps({
   data: {
@@ -26,18 +34,9 @@ const props = defineProps({
   },
 });
 
-const toast = useToast();
-
 const tableData = reactive({
   thead: ['Projekt', 'Stunden', 'Wert'] as Array<string>,
   tbody: [{ slot: 'name' }, { slot: 'time' }, { slot: 'value' }] as Array<any>,
-});
-
-const copy = (text: string) => ({
-  text,
-  success: () => {
-    toast('Daten kopiert');
-  },
 });
 </script>
 

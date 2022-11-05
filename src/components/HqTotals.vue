@@ -4,7 +4,7 @@
     <UiList class="totals-list">
       <UiItem v-copy="copy(totals.hours.toFixed(2))">
         <UiItemTextContent>
-          {{ totals.hours.toFixed(2) }}
+          {{ formatNumber(totals.hours) }}
         </UiItemTextContent>
         <UiItemLastContent>
           Std.
@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { formatCurrency } from '@/tools/util';
+import { formatCurrency, formatNumber } from '@/tools/util';
 
 import { UiItem, UiItemDivider, UiItemLastContent, UiItemTextContent, UiList, useToast } from 'balm-ui';
 
