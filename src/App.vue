@@ -23,6 +23,7 @@
     </UiGrid>
   </main>
   <HqFooter />
+   <HqNotification />
 </template>
 
 <script setup lang="ts">
@@ -35,6 +36,7 @@ import { UiGrid, UiGridCell, UiTopAppBar } from 'balm-ui';
 import HqConfig from '@/components/HqConfig.vue';
 import HqUpload from '@/components/HqUpload.vue';
 import HqFooter from '@/components/HqFooter.vue';
+import HqNotification from '@/components/HqNotification.vue';
 
 import convertData from '@/tools/dataConvertor';
 
