@@ -17,7 +17,7 @@ const hideNotification = () => {
   state.hideNotification();
   hideTimer.value = setTimeout(() => {
     showNotification.value = false;
-  }, 1000);
+  }, 1000) as unknown as number;
 };
 
 watch(() => state.notificationVisible, () => {
@@ -26,7 +26,7 @@ watch(() => state.notificationVisible, () => {
     clearTimeout(hideTimer.value);
     setTimeout(() => {
       visible.value = true;
-      hideTimer.value = setTimeout(hideNotification, 2000);
+      setTimeout(hideNotification, 2000);
     }, 100);
   }
 });
