@@ -1,0 +1,1 @@
+const t=r=>new Intl.NumberFormat("de-DE",{style:"currency",currency:"EUR"}).format(r),m=r=>new Intl.NumberFormat("de-DE",{style:"decimal",minimumFractionDigits:2,maximumFractionDigits:2}).format(r);export{t as a,m as f};
